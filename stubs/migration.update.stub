@@ -8,19 +8,17 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
-            $table->id();
-            $table->string('slug')
-                ->unique();
-            $table->string('title');
-            $table->timestamps();
+        Schema::table('{{ table }}', function (Blueprint $table) {
+            //
         });
     }
 
     public function down(): void
     {
         if (app()->isLocal()) {
-            Schema::dropIfExists('categories');
+            Schema::table('{{ table }}', function (Blueprint $table) {
+                //
+            });
         }
     }
 };
