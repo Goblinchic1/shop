@@ -35,7 +35,7 @@ class AuthController extends Controller
     {
         if (!auth()->attempt($request->validated())) {
             return back()->withErrors([
-                'email' => 'неверно указан email или пароль.',
+                'email' => 'Пользователь не найден.',
             ])->onlyInput('email');
         }
 
