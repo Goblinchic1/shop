@@ -1,7 +1,12 @@
 <?php
 
+use App\Providers\AppServiceProvider;
+use App\Providers\EventServiceProvider;
+use App\Providers\RouteServiceProvider;
+use App\Providers\TelescopeServiceProvider;
 use App\Providers\TestingServiceProvider;
 use App\Providers\ViewServiceProvider;
+use Domain\Auth\Providers\AuthServiceProvider;
 use Illuminate\Support\Facades\Facade;
 
 return [
@@ -184,6 +189,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
         /*
          * Package Service Providers...
          */
@@ -191,15 +197,15 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
+        AppServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
-        App\Providers\TelescopeServiceProvider::class,
-        ViewServiceProvider::class,
-        TestingServiceProvider::class
+        EventServiceProvider::class,
+        RouteServiceProvider::class,
+        TelescopeServiceProvider::class,
 
+        ViewServiceProvider::class,
+        TestingServiceProvider::class,
+        AuthServiceProvider::class,
     ],
 
     /*
