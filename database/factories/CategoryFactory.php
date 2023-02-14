@@ -13,6 +13,8 @@ class CategoryFactory extends Factory
     public function definition(): array
     {
         return [
+            'on_home_page' => $this->faker->boolean(),
+            'sorting' => $this->faker->numberBetween(1, 999),
             'title' => ucfirst($this->faker->words(2, true))
         ];
     }
