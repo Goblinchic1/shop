@@ -2,13 +2,16 @@
 
 namespace App\Models;
 
-use App\Traits\Model\HasSlug;
-use App\Traits\Model\HasThumbnail;
+use Domain\Catalog\Models\Brand;
+use Domain\Catalog\Models\Category;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Support\Casts\PriceCast;
+use Support\Traits\Model\HasSlug;
+use Support\Traits\Model\HasThumbnail;
 
 /**
  * @mixin Builder
@@ -29,6 +32,11 @@ class Product extends Model
         'thumbnail',
         'on_home_page',
         'sorting'
+    ];
+
+
+    protected $casts = [
+        'price' => PriceCast::class
     ];
 
 
