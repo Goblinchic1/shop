@@ -42,10 +42,13 @@
             @endauth
 
             <nav class="flex flex-col mt-8">
-                <a href="{{ route('home') }}" class="self-start py-1 text-dark hover:text-pink text-md font-bold">Главная</a>
-                <a href="#" class="self-start py-1 text-dark hover:text-pink text-md font-bold">Каталог товаров</a>
-                <a href="#" class="self-start py-1 text-dark hover:text-pink text-md font-bold">Мои заказы</a>
-                <a href="#" class="self-start py-1 text-dark hover:text-pink text-md font-bold">Корзина</a>
+                @foreach($menu as $item)
+                    <a href="{{ $item->link() }}"
+                       class="self-start py-1 text-dark hover:text-pink text-md @if($item->isActive()) font-bold @endif"
+                    >
+                        {{ $item->label() }}
+                    </a>
+                @endforeach
             </nav>
             <div class="flex flex-wrap items-center space-x-6 mt-8">
                 <a href="#" class="inline-flex items-center text-darkblue hover:text-purple" target="_blank" rel="nofollow noopener">
