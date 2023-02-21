@@ -1,6 +1,7 @@
 <?php
 
 use App\Providers\AppServiceProvider;
+use App\Providers\CatalogServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Providers\TelescopeServiceProvider;
@@ -206,6 +207,7 @@ return [
         ViewServiceProvider::class,
         TestingServiceProvider::class,
         AuthServiceProvider::class,
+        CatalogServiceProvider::class,
     ],
 
     /*
