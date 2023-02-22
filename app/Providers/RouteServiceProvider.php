@@ -6,6 +6,7 @@ use App\Contracts\RouteRegistrar;
 use App\Routing\AppRegistrar;
 use App\Routing\AuthRegistrar;
 use App\Routing\CatalogRegistrar;
+use App\Routing\ProductRegistrar;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Contracts\Routing\Registrar;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
@@ -16,27 +17,18 @@ use Symfony\Component\HttpFoundation\Response;
 
 class RouteServiceProvider extends ServiceProvider
 {
-    /**
-     * The path to the "home" route for your application.
-     *
-     * Typically, users are redirected here after authentication.
-     *
-     * @var string
-     */
+
     public const HOME = '/';
 
     protected array $registrars = [
         AppRegistrar::class,
         AuthRegistrar::class,
         CatalogRegistrar::class,
+        ProductRegistrar::class,
     ];
 
-    /**
-     * Define your route model bindings, pattern filters, and other route configuration.
-     *
-     * @return void
-     */
-    public function boot()
+
+    public function boot(): void
     {
         $this->configureRateLimiting();
 
@@ -45,12 +37,8 @@ class RouteServiceProvider extends ServiceProvider
         });
     }
 
-    /**
-     * Configure the rate limiters for the application.
-     *
-     * @return void
-     */
-    protected function configureRateLimiting()
+
+    protected function configureRateLimiting(): void
     {
         RateLimiter::for('global', function (Request $request) {
             return Limit::perMinute(500)
