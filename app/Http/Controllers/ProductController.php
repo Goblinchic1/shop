@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Product;
+use Domain\Product\Models\Product;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\View\View;
@@ -25,14 +25,10 @@ class ProductController extends Controller
             session()->put('also.', $product->id, $product->id);
         }
 
-        $options = $product->optionValues->mapToGroups(function ($item) {
-            return [$item->option->title => $item];
-        });
-
 
         return view('product.show', [
             'product' => $product,
-            'options' => $options,
+            'options' => $product->optionValues->keyValues(),
             'alsoProducts' => $alsoProducts ?? null
         ]);
     }

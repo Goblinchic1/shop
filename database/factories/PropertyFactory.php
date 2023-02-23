@@ -2,7 +2,7 @@
 
 namespace Database\Factories;
 
-use App\Models\Property;
+use Domain\Product\Models\Property;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -10,11 +10,8 @@ use Illuminate\Database\Eloquent\Factories\Factory;
  */
 class PropertyFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+
+    protected $model = Property::class;
     public function definition()
     {
         return [
