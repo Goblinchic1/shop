@@ -23,7 +23,7 @@ class CartController extends Controller
 
     public function add(Product $product): RedirectResponse
     {
-        cart()->add(
+        Cart::add(
             $product,
             request('quantity', 1),
             request('options', []),
@@ -38,7 +38,7 @@ class CartController extends Controller
 
     public function quantity(CartItem $item): RedirectResponse
     {
-        cart()->quantity($item, request('quantity', 1));
+        Cart::quantity($item, request('quantity', 1));
         flash()->info('Количество товаров изменено');
 
         return redirect()
@@ -48,7 +48,7 @@ class CartController extends Controller
 
     public function delete(CartItem $item): RedirectResponse
     {
-        cart()->delete($item);
+        Cart::delete($item);
         flash()->info('Удалено из корзины');
 
         return redirect()
@@ -58,7 +58,7 @@ class CartController extends Controller
 
     public function truncate(): RedirectResponse
     {
-        cart()->truncate();
+        Cart::truncate();
         flash()->info('Корзина очищена');
 
         return redirect()

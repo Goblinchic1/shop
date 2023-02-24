@@ -2,6 +2,7 @@
 
 use App\Providers\AppServiceProvider;
 use App\Providers\CatalogServiceProvider;
+use App\Providers\DomainServiceProvider;
 use App\Providers\EventServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Providers\TelescopeServiceProvider;
@@ -208,6 +209,7 @@ return [
         TestingServiceProvider::class,
         AuthServiceProvider::class,
         CatalogServiceProvider::class,
+        DomainServiceProvider::class,
     ],
 
     /*

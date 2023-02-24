@@ -2,9 +2,10 @@
 
 namespace Domain\Cart;
 
+use Domain\Cart\Contracts\CartIdentityStorageContract;
 use Domain\Cart\Models\Cart;
 use Domain\Cart\Models\CartItem;
-use Domain\Cart\StorageIdentities\SessionIdentityStorage;
+use Domain\Cart\StorageIdentities\FakeIdentityStorage;
 use Domain\Product\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
@@ -16,9 +17,15 @@ use Support\ValueObjects\Price;
 final class CartManager
 {
     public function __construct(
-        protected SessionIdentityStorage $identityStorage
+        protected CartIdentityStorageContract $identityStorage
     )
     {
+    }
+
+
+    public static function fake(): void
+    {
+        app()->bind(CartIdentityStorageContract::class, FakeIdentityStorage::class);
     }
 
 
@@ -57,7 +64,7 @@ final class CartManager
     }
 
 
-    public function add(Product $product, int $quantity = 1, array $option_values = null): Model|Builder
+    public function add(Product $product, int $quantity = 1, array $option_values = []): Model|Builder
     {
         $cart = Cart::query()
             ->updateOrCreate([
@@ -102,7 +109,9 @@ final class CartManager
 
     public function truncate(): void
     {
-        $this->get()?->delete();
+        if ($this->get()) {
+            $this->get()->delete();
+        }
 
         $this->forgetCache();
     }
@@ -110,7 +119,11 @@ final class CartManager
 
     public function cartItems(): Collection
     {
-        return $this->get()?->cartItems ?? collect([]);
+        if (!$this->get()) {
+            return collect([]);
+        }
+
+        return $this->get()->cartItems;
     }
 
 
@@ -153,5 +166,13 @@ final class CartManager
                 ->when(auth()->check(), fn(Builder $query) => $query->orWhere('user_id', auth()->id()))
                 ->first() ?? false;
         });
+    }
+
+
+    public function updateStorageId(string $old, string $current): void
+    {
+        Cart::query()
+            ->where('storage_id', $old)
+            ->update($this->storedData($current));
     }
 }
