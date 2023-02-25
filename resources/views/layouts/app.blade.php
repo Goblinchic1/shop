@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{ Vite::image('favicon-32x32.png') }}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{ Vite::image('favicon-16x16.png') }}">
 
-    <title>@yield('title', env('APP_NAME'))</title>
+    <title>@yield('title', $seo_title ?? env('APP_NAME'))</title>
 
     @vite(['resources/css/app.css','resources/sass/main.sass', 'resources/js/app.js'])
 </head>
