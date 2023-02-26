@@ -4,6 +4,7 @@ use App\Providers\AppServiceProvider;
 use App\Providers\CatalogServiceProvider;
 use App\Providers\DomainServiceProvider;
 use App\Providers\EventServiceProvider;
+use App\Providers\MoonShineServiceProvider;
 use App\Providers\RouteServiceProvider;
 use App\Providers\TelescopeServiceProvider;
 use App\Providers\TestingServiceProvider;
@@ -195,6 +196,7 @@ return [
         /*
          * Package Service Providers...
          */
+        MoonShineServiceProvider::class,
 
         /*
          * Application Service Providers...
