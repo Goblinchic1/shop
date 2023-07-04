@@ -40,11 +40,9 @@ class ProductResource extends Resource
                     Tab::make('Basic', [
                         ID::make()->sortable(),
 
-//                        Image::make('Thumbnail')
-//                            ->dir('images/products')
-//                            ->withPrefix('/storage/'),
-
-                        MediaLibrary::make('thumbnail'),
+                        Image::make('Thumbnail')
+                            ->dir('images/products')
+                            ->withPrefix('/storage/'),
 
                         Text::make('Title'),
 
