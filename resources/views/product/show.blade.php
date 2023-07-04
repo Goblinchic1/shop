@@ -69,10 +69,12 @@
                         </div>
 
                         <ul class="sm:max-w-[360px] space-y-2 mt-8">
-                            @foreach($product->json_properties as $propertyName => $propertyValue)
-                                <li class="flex justify-between text-body">
-                                    <strong>{{ $propertyName }}</strong> {{ $propertyValue }}</li>
-                            @endforeach
+                            @isset($product->json_properties)
+                                @foreach($product->json_properties as $propertyName => $propertyValue)
+                                    <li class="flex justify-between text-body">
+                                        <strong>{{ $propertyName }}</strong> {{ $propertyValue }}</li>
+                                @endforeach
+                            @endisset
                         </ul>
 
 
