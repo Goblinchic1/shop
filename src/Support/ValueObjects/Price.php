@@ -15,7 +15,7 @@ final class Price implements Stringable
     ];
 
     public function __construct(
-        private readonly int $value,
+        private readonly int|null $value,
         private readonly string $currency = 'RUB',
         private readonly int $precision = 100
     )
@@ -30,13 +30,13 @@ final class Price implements Stringable
     }
 
 
-    public function raw(): int
+    public function raw(): int|null
     {
         return $this->value;
     }
 
 
-    public function value():float|int
+    public function value():float|int|null
     {
         return $this->value / $this->precision;
     }

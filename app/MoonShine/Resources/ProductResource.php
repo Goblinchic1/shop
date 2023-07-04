@@ -12,6 +12,7 @@ use Leeto\MoonShine\Fields\BelongsTo;
 use Leeto\MoonShine\Fields\BelongsToMany;
 use Leeto\MoonShine\Fields\Image;
 use Leeto\MoonShine\Fields\Number;
+use Leeto\MoonShine\Fields\Spatie\MediaLibrary;
 use Leeto\MoonShine\Fields\Text;
 use Leeto\MoonShine\Resources\Resource;
 use Leeto\MoonShine\Fields\ID;
@@ -39,9 +40,11 @@ class ProductResource extends Resource
                     Tab::make('Basic', [
                         ID::make()->sortable(),
 
-                        Image::make('Thumbnail')
-                            ->dir('images/products')
-                            ->withPrefix('/storage/'),
+//                        Image::make('Thumbnail')
+//                            ->dir('images/products')
+//                            ->withPrefix('/storage/'),
+
+                        MediaLibrary::make('thumbnail'),
 
                         Text::make('Title'),
 
@@ -67,9 +70,6 @@ class ProductResource extends Resource
 
                     Tab::make('Options', [
                         BelongsToMany::make('OptionValues', resource: 'title')
-                            ->fields([
-                                Text::make('Value')
-                            ])
                             ->hideOnIndex()
                     ]),
                 ])

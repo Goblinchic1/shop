@@ -11,6 +11,8 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Laravel\Scout\Searchable;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 use Support\Casts\PriceCast;
 use Support\Traits\Model\HasSlug;
 use Support\Traits\Model\HasThumbnail;
@@ -18,8 +20,9 @@ use Support\Traits\Model\HasThumbnail;
 /**
  * @method static Product|ProductQueryBuilder query()
  */
-class Product extends Model
+class Product extends Model implements HasMedia
 {
+    use InteractsWithMedia;
     use HasFactory;
     use HasSlug;
     use HasThumbnail;
@@ -37,6 +40,12 @@ class Product extends Model
         'text',
         'json_properties'
     ];
+
+
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('thumbnail')->singleFile();
+    }
 
 
     protected $casts = [
